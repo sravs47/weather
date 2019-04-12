@@ -6,6 +6,8 @@ from weather.middleware.tokens_middleware import tokens_midlware
 token_blueprint = Blueprint('token_blueprint',__name__)
 from weather.utils import is_newerthan_1hour,JSON_MIME_TYPE,to_dict
 
+
+request.headers.get('auth_token')
 class Token(Resource):
     def get(self,token_id):
         pass
