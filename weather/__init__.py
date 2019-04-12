@@ -2,7 +2,6 @@ from flask import Flask
 app = Flask(__name__)
 
 from flask_restful import Api
-import weather.views
 import weather.database_model
 from weather.api.token import Token_transactions,token_cheker
 from weather.api.token import token_blueprint
