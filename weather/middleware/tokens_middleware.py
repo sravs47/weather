@@ -1,4 +1,4 @@
-
+from weather.exceptions import weatherException
 from weather.database_entities.customer_entity import customer
 from weather.database_model import db
 import uuid
@@ -35,7 +35,15 @@ class tokens_midlware:
             return True
         return False
 
+    def get_token_time(self,token_id):
+        return self.get_token(token_id).time
 
+    def get_token(self, token_id):
+        token_data = customer.query.filter(customer.token_id == token_id).first()
+        if token_data is not None:
+            return token_data
+        else:
+            raise weatherException({'code':'c1','message':'Not a valid token'})
 
 
 

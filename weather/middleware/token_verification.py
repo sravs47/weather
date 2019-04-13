@@ -1,9 +1,12 @@
 from weather.utils import is_newerthan_1hour,JSON_MIME_TYPE
 from weather.middleware.tokens_middleware import tokens_midlware
-from flask import Response
+from flask import Response,request
 import json
 from functools import wraps
 from weather.exceptions.weatherException import weatherException
+from werkzeug.exceptions import Unauthorized
+import traceback
+
 
 class token_verification:
     def token_response(self,to_model):
@@ -19,8 +22,27 @@ class token_verification:
 def is_expired(f):
     @wraps(f)
     def wrapper(*args,**kwargs):
+
+        # token_id = request.json
+        token_number = request.headers.get('auth_token')
         try:
-            is_newerthan_1hour()
+            time = tokens_midlware().get_token_time(token_number)
+            print('uauauau')
+        except Exception as e:
+            traceback.print_exc()
+            # raise Unauthorized("Unable to authorize the token")
+            raise e
+
+        if time is not None:
+            if is_newerthan_1hour(time):
+                return f(*args, **kwargs)
+
+    return wrapper
+
+
+
+
+
 
 
 

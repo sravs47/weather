@@ -3,21 +3,22 @@ from flask import request,Response,Blueprint
 from weather.models.customer import customer
 from flask_restful import Resource
 from weather.middleware.tokens_middleware import tokens_midlware
-token_blueprint = Blueprint('token_blueprint',__name__)
 from weather.utils import JSON_MIME_TYPE
 from weather.middleware.token_verification import token_verification
 
 
+token_blueprint = Blueprint('token_blueprint',__name__)
 # request.headers.get('auth_token')
-class Token(Resource):
-    def get(self,token_id):
-        pass
+# class Token(Resource):
+#     def get(self,token_id):
+#         pass
 
 class Token_transactions(Resource):
     def post(self):
         data = request.json
         to_model = customer(data['username'],data['password'])
         return  token_verification().token_response(to_model)
+
 
 class token_cheker(Resource):
     def get(self,token_id):

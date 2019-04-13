@@ -9,4 +9,5 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:rootroot@localhost/weather'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+
 db = SQLAlchemy(app)
