@@ -2,6 +2,8 @@ from weather.utils import is_newerthan_1hour,JSON_MIME_TYPE
 from weather.middleware.tokens_middleware import tokens_midlware
 from flask import Response
 import json
+from functools import wraps
+from weather.exceptions.weatherException import weatherException
 
 class token_verification:
     def token_response(self,to_model):
@@ -13,3 +15,16 @@ class token_verification:
             token_id =tokens_midlware().create_token(to_model)
             print("successfully updated token")
             return Response(json.dumps(token_id), status=201, mimetype=JSON_MIME_TYPE)
+
+def is_expired(f):
+    @wraps(f)
+    def wrapper(*args,**kwargs):
+        try:
+            is_newerthan_1hour()
+
+
+
+
+
+
+

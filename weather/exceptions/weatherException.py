@@ -1,0 +1,2 @@
+class weatherException(Exception):
+    pass
