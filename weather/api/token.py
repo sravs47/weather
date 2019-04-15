@@ -8,10 +8,7 @@ from weather.middleware.token_verification import token_verification
 
 
 token_blueprint = Blueprint('token_blueprint',__name__)
-# request.headers.get('auth_token')
-# class Token(Resource):
-#     def get(self,token_id):
-#         pass
+
 
 class Token_transactions(Resource):
     def post(self):

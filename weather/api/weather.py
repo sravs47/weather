@@ -8,9 +8,7 @@ from functools import lru_cache
 
 weather_blueprint = Blueprint('weather_blueprint',__name__)
 
-
 class weather_data(Resource):
-
     @is_expired
     def get(self):
         args = request.args
