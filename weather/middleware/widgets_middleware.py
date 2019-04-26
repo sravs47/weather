@@ -33,11 +33,12 @@ class widgets_middleware:
         self.add_city(city_name)
         city_data1 = self.get_city(city_name)
         user_data = customers.query.filter(customers.token_id == token_number).first()
-        user_city_data = user_cities.query.filter(user_cities.user_id==user_data.id,user_cities.city_id==city_data1.id)
+        user_city_data = user_cities.query.filter(user_cities.user_id==user_data.id,user_cities.city_id==city_data1.id).first()
         if user_data is not None and user_city_data is None:
             data2 = user_cities(user_id=user_data.id, city_id=city_data1.id)
             db.session.add(data2)
-            db.session.commit()
+
+            print(db.session.commit())
         return {'id':city_data1.id,'city':city_data1.city}
 
     def delete_user_city(self,c_id):
